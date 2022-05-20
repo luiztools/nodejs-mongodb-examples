@@ -1,0 +1,50 @@
+<%- include('top.ejs') %>
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Excluir</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% docs.forEach(function(customer){ %>
+        <tr>
+          <td>
+            <a href="/edit/<%= customer._id %>">
+              <%= customer.nome %>
+            </a>
+          </td>
+          <td>
+            <a href="/delete/<%= customer._id %>" class="btn btn-danger"
+              onclick="return confirm('Tem certeza que deseja excluir?');">
+              X
+            </a>
+          </td>
+        </tr>
+        <% }) %>
+    </tbody>
+  </table>
+  <hr />
+  <p>
+    <%= count %> clientes encontrados!
+  </p>
+
+  <nav aria-label="Paginação">
+    <ul class="pagination">
+      <% for(let i=1; i <=qtdPaginas; i++) { 
+        if(i !== pagina){ %>
+        <li class="page-item"><a class="page-link"  href="/<%= i %>">
+            <%= i %>
+          </a></li>
+        <% } else { %>
+          <li class="page-item active"><a class="page-link" href="/<%= i %>">
+              <%= i %>
+            </a></li>
+        <% }
+        } %>
+    </ul>
+  </nav>
+
+  <hr />
+  <a href="/new" class="btn btn-primary">Cadastrar novo cliente</a>
+  <%- include('bottom.ejs') %>
