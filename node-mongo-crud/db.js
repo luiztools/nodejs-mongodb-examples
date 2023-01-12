@@ -1,38 +1,54 @@
-const mongoClient = require("mongodb").MongoClient;
-mongoClient.connect("mongodb://localhost")
-    .then(conn => global.conn = conn.db("workshoptdc"))
-    .catch(err => console.log(err))
+const { MongoClient, ObjectId } = require("mongodb");
 
-const TAMANHO_PAGINA = 5; 
+let singleton;
+const COLLECTION = "customers";
 
-function findAll(pagina) {
-    const tamanhoSkip = TAMANHO_PAGINA * (pagina - 1); 
-    return global.conn.collection("customers")
-                      .find()
-                      .skip(tamanhoSkip)
-                      .limit(TAMANHO_PAGINA)
-                      .toArray(); 
+async function connect() {
+    if (singleton) return singleton;
+
+    const client = new MongoClient(process.env.MONGO_HOST);
+    await client.connect();
+
+    singleton = client.db(process.env.MONGO_DATABASE);
+    return singleton;
 }
 
-function insert(customer) {
-    return global.conn.collection("customers").insertOne(customer);
+const TAMANHO_PAGINA = 5;
+
+async function findAll(pagina) {
+    const tamanhoSkip = TAMANHO_PAGINA * (pagina - 1);
+    const db = await connect();
+
+    return db.collection(COLLECTION)
+        .find()
+        .skip(tamanhoSkip)
+        .limit(TAMANHO_PAGINA)
+        .toArray();
 }
 
-const ObjectId = require("mongodb").ObjectId;
-function findOne(id) {
-    return global.conn.collection("customers").findOne(new ObjectId(id));
+async function insert(customer) {
+    const db = await connect();
+    return db.collection(COLLECTION).insertOne(customer);
 }
 
-function update(id, customer) {
-    return global.conn.collection("customers").updateOne({ _id: new ObjectId(id) }, { $set: customer });
+async function findOne(id) {
+    const db = await connect();
+    return db.collection(COLLECTION).findOne(new ObjectId(id));
 }
 
-function deleteOne(id) {
-    return global.conn.collection("customers").deleteOne({ _id: new ObjectId(id) });
+async function update(id, customer) {
+    const db = await connect();
+    return db.collection(COLLECTION).updateOne({ _id: new ObjectId(id) }, { $set: customer });
 }
 
-function countAll(){  
-    return global.conn.collection("customers").countDocuments();
+async function deleteOne(id) {
+    const db = await connect();
+    return db.collection(COLLECTION).deleteOne({ _id: new ObjectId(id) });
+}
+
+async function countAll() {
+    const db = await connect();
+    return db.collection(COLLECTION).countDocuments();
 }
 
 module.exports = { findAll, insert, findOne, update, deleteOne, countAll, TAMANHO_PAGINA }
