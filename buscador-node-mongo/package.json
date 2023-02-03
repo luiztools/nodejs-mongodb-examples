@@ -9,6 +9,6 @@
   "author": "LuizTools",
   "license": "ISC",
   "dependencies": {
-    "mongodb": "^3.5.9"
+    "mongodb": "^5.0.0"
   }
 }
