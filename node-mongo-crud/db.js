@@ -33,7 +33,7 @@ async function insert(customer) {
 
 async function findOne(id) {
     const db = await connect();
-    return db.collection(COLLECTION).findOne(new ObjectId(id));
+    return db.collection(COLLECTION).findOne({_id: new ObjectId(id)});
 }
 
 async function update(id, customer) {
