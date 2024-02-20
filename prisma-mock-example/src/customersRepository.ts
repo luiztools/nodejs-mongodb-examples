@@ -1,11 +1,5 @@
 import prisma from './client';
 
-async function connect() {
-    await prisma.$connect();
-}
-
-connect();
-
 export function getCustomers() {
     return prisma.customers.findMany();
 }

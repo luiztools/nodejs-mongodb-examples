@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <center>
+        <h1> Search Engine </h1>
+        <form action="/search" method="get">
+            <input type="text" name="query" />
+            <input type="submit" value="Search" />
+        </form>
+        <%
+            if(results){
+                if(list.length > 0){
+        %>
+        <b>Resultados da pesquisa por <%= search %>:</b>
+        <ul>
+            <% list.forEach(function(item){ %>
+                <li><%= item.nome %> (<%= item.profissao%>)</li>
+            <% }); %>
+        </ul>
+        <% } else{ %>
+            <b>Nenhum resultado encontrado para <%= search %>!</b>
+        <% 
+            }
+        }
+        %>
+    </center>
+</body>
+</html>

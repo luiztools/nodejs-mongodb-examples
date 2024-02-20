@@ -21,4 +21,11 @@ Exemplo em PHP: https://imasters.com.br/back-end/mecanismos-de-busca-de-php-com-
 
 Tutorial de webcrawler: https://www.luiztools.com.br/post/webscrapping-com-node-js/ 
 
+## Mais
+
+Me siga nas redes sociais: https://about.me/luiztools
+
+Receba novidades no Telegram: https://t.me/luiznews
+
+Conheça meus cursos: https://www.luiztools.com.br/meus-cursos
 
