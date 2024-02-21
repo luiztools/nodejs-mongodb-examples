@@ -15,7 +15,7 @@ module.exports = function (passport) {
 
     function findUserById(id) {
         const ObjectId = require("mongodb").ObjectId;
-        return global.db.collection("users").findOne({ _id: ObjectId(id) });
+        return global.db.collection("users").findOne({ _id: ObjectId.createFromHexString(id) });
     }
 
     passport.serializeUser((user, done) => {

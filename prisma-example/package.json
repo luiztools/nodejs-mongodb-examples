@@ -7,8 +7,8 @@
     "start": "ts-node index"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "LuizTools",
+  "license": "MIT",
   "devDependencies": {
     "prisma": "^5.2.0",
     "ts-node": "^10.9.1",

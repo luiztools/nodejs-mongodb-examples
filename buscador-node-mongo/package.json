@@ -2,13 +2,13 @@
   "name": "buscador",
   "version": "1.0.0",
   "description": "A sample search engine",
-  "main": "simplificacao.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index"
   },
   "author": "LuizTools",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "mongodb": "^5.0.0"
+    "mongodb": "^6.3.0"
   }
 }
